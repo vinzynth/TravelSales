@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="at.tug.oad.travelsales.model.impl">
+	<class name="Game" table="GAME">
+		<id name="id" type="int" column="id">
+			<generator class="native" />
+		</id>
+		<property name="name" column="name" type="string" />
+		<property name="logoPath" column="logo_path" type="string" />
+		<property name="visible" column="visible" type="boolean" />
+		<property name="createDate" column="create_date" type="date" />
+		<bag name="levels" table="GAME_LEVELS" inverse="false" lazy="false" fetch="select" >
+			<key>
+				<column name="game_id"/>
+			</key>
+			<many-to-many entity-name="at.tug.oad.travelsales.model.impl.Level">
+				<column name="level_id"/>
+			</many-to-many>
+		</bag>
+		<many-to-one name="creator" column="creator_id" class="User"/>
+	</class>
+</hibernate-mapping>

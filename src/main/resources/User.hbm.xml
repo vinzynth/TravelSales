@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="at.tug.oad.travelsales.model.impl">
+	<class name="User" table="USER">
+		<id name="id" type="int" column="id">
+			<generator class="native" />
+		</id>
+		<property name="userName" column="user_name" type="string" />
+		<property name="accountName" column="account_name" type="string" />
+		<property name="password" column="password" type="string" />
+		<property name="mailAddress" column="mail_address" type="string" />
+		<property name="profileInformation" column="profile_information" type="string" />
+		<property name="active" column="active" type="boolean" />
+		<property name="createDate" column="create_date" type="date" />
+		<property name="userType" column="user_type">
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">at.tug.oad.travelsales.model.UserType</param>
+				<param name="useNamed">true</param>
+			</type>
+		</property>
+		<set name="friendList" table="USER_FRIENDLIST" inverse="false" lazy="true" fetch="select">
+			<key>
+				<column name="user_id"/>
+			</key>
+			<many-to-many entity-name="at.tug.oad.travelsales.model.impl.User">
+				<column name="friend_id"/>
+			</many-to-many>
+		</set>
+	</class>
+</hibernate-mapping>

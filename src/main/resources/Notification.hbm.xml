@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="at.tug.oad.travelsales.model.impl">
+	<class name="Notification" table="NOTIFICATION">
+		<id name="id" type="int" column="id">
+			<generator class="native" />
+		</id>
+		<property name="content" column="content" type="text" />
+		<property name="sendTime" column="send_time" type="date" />
+		<property name="readTime" column="read_time" type="date" />
+		<set name="recommendedGames" table="NOTIFICATION_RECOMMENDED_GAMES" inverse="false" lazy="true" fetch="select" >
+			<key>
+				<column name="notification_id"/>
+			</key>
+			<many-to-many entity-name="at.tug.oad.travelsales.model.impl.Game">
+				<column name="game_id"/>
+			</many-to-many>
+		</set>
+		<many-to-one name="sender" column="sender_id" class="User"/>
+		<many-to-one name="recipient" column="recipient_id" class="User"/>
+		<property name="notificationType" column="notification_type">
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">at.tug.oad.travelsales.model.NotificationType</param>
+				<param name="useNamed">true</param>
+			</type>
+		</property>
+	</class>
+</hibernate-mapping>

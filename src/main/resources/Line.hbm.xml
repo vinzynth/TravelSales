@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="at.tug.oad.travelsales.model.impl">
+	<class name="Line" table="LINE">
+		<id name="id" type="int" column="id">
+			<generator class="native" />
+		</id>
+		<many-to-one name="pointA" column="point_a_id" class="Point"/>
+		<many-to-one name="pointB" column="point_b_id" class="Point"/>
+		<many-to-one name="user" column="user_id" class="User"/>
+		<many-to-one name="baseGame" column="base_game_id" class="BaseGame"/>
+	</class>
+</hibernate-mapping>

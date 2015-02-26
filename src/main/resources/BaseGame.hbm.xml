@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="at.tug.oad.travelsales.model.impl">
+	<class name="BaseGame" table="BASE_GAME">
+		<id name="id" type="int" column="id">
+			<generator class="native" />
+		</id>
+		<property name="name" column="name" type="string" />
+		<property name="figurePath" column="figure_path" type="string" />
+		<property name="createDate" column="create_date" type="date" />
+		<many-to-one name="creator" column="creator" class="User" />
+		<bag name="points" table="BASE_GAME_POINTS" inverse="false" lazy="false" fetch="select" >
+			<key>
+				<column name="base_game_id"/>
+			</key>
+			<many-to-many entity-name="at.tug.oad.travelsales.model.impl.Point">
+				<column name="point_id"/>
+			</many-to-many>
+		</bag>
+		<bag name="constraints" table="BASE_GAME_CONSTRAINTS" inverse="false" lazy="false" fetch="select" >
+			<key>
+				<column name="base_game_id"/>
+			</key>
+			<many-to-many entity-name="at.tug.oad.travelsales.model.impl.constraints.GameConstraint">
+				<column name="constraint_id"/>
+			</many-to-many>
+		</bag>
+	</class>
+</hibernate-mapping>

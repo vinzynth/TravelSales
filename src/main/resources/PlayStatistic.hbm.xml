@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="at.tug.oad.travelsales.model.impl">
+	<class name="PlayStatistic" table="PLAY_STATISTIC">
+		<id name="id" type="int" column="id">
+			<generator class="native" />
+		</id>
+		<property name="userId" column="user_id" type="int" />
+		<property name="playedTime" column="played_time" type="long" />
+		<property name="baseGameFinished" column="is_finished" type="boolean" />
+		<property name="baseGameId" column="base_game_id" type="int" />
+		<property name="usedTurns" column="used_turns" type="long" />
+		<property name="score" column="score" type="int" />
+		<property name="playedDate" column="played_date" type="date" />
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.bravestone</groupId>
+	<artifactId>bravestone-parent</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>Bravestone</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<profiles>
+		<profile>
+			<id>localhost</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<server.deployment.tomcat>http://localhost:8081</server.deployment.tomcat>
+			</properties>
+		</profile>
+		<profile>
+			<id>diana64</id>
+			<properties>
+				<server.deployment.tomcat>http://diana64.bravestone.at:8080</server.deployment.tomcat>
+			</properties>
+		</profile>
+		<profile>
+			<id>diana</id>
+			<properties>
+				<server.deployment.tomcat>http://diana.bravestone.at:8080</server.deployment.tomcat>
+			</properties>
+		</profile>
+		<profile>
+			<id>tmdev</id>
+			<properties>
+				<server.deployment.tomcat>http://tmdev.bravestone.at:8081</server.deployment.tomcat>
+			</properties>
+		</profile>
+		<profile>
+			<id>tm</id>
+			<properties>
+				<server.deployment.tomcat>http://tm.bravestone.at:8081</server.deployment.tomcat>
+			</properties>
+		</profile>
+		<profile>
+			<id>nms</id>
+			<properties>
+				<server.deployment.tomcat>http://nms.bravestone.at:8081</server.deployment.tomcat>
+			</properties>
+		</profile>
+	</profiles>
+
+	<build>
+		<plugins>
+			<plugin>
+				<inherited>true</inherited>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>2.5.1</version>
+			</plugin>
+<!-- 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<failOnError>false</failOnError>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-webdav-jackrabbit</artifactId>
+				<version>2.2</version>
+			</extension>
+		</extensions>
+	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>bravestone_releases</id>
+			<url>http://office64.bravestone.at/nexus/content/repositories/bravestone_releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>bravestone</id>
+			<url>http://office64.bravestone.at/nexus/content/repositories/bravestone</url>
+		</snapshotRepository>
+		<site>
+			<id>bravestone_site</id>
+			<url>dav:http://office64.bravestone.at:8080/nexus/content/sites/bravestone_site/bravestone</url>
+		</site>
+	</distributionManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.16</version>
+		</dependency>
+	</dependencies>
+	<modules>
+		<module>bravestone-utils</module>
+		<module>bravestone-categorizationEngine</module>
+		<module>bravestone-sdc</module>
+		<module>bravestone-diana</module>
+		<module>bravestone-openStreetMapClassificator</module>
+		<module>bravestone-hadoop</module>
+		<module>bravestone-hadoop-jobs</module>
+		<module>bravestone-birtLauncher</module>
+		<module>bravestone-iBus</module>
+		<module>bravestone-hibernate</module>
+		<!-- <module>bravestone-erp</module> -->
+		<!-- <module>bravestone-osm-tiles</module> -->
+		<module>bravestone-fileProvider</module>
+	</modules>
+
+	<organization>
+		<name>Bravestone IT</name>
+		<url>http://www.bravestone.at</url>
+	</organization>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.11</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+</project>
